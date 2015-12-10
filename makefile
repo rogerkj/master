@@ -1,6 +1,6 @@
 # Standard makefile
 
-CXX= c++
+CXX= mpic++
 CPPFLAGS = -O3 -llapack -lblas -larmadillo
 PROG = main
 LIB1 = lib
@@ -15,9 +15,11 @@ QFN = QuantumForceNumeric
 DI = Diatomic
 ORB = Orbitals
 GAUSS = Gaussians
+MINI = Minimizer
 
-${PROG} : 	${PROG}.o ${LIB1}.o  ${LIB2}.o ${LIB3}.o ${WAVE}.o ${LEN}.o ${HYD}.o ${LEO}.o ${QF}.o ${QFN}.o ${DI}.o ${ORB}.o ${GAUSS}.o
-		${CXX} ${PROG}.o ${LIB1}.o ${LIB2}.o ${LIB3}.o ${WAVE}.o ${LEN}.o ${HYD}.o ${LEO}.o ${QF}.o ${QFN}.o ${ORB}.o ${DI}.o ${GAUSS}.o -o ${PROG} ${CPPFLAGS}
+
+${PROG} : 	${PROG}.o ${LIB1}.o  ${LIB2}.o ${LIB3}.o ${WAVE}.o ${LEN}.o ${HYD}.o ${LEO}.o ${QF}.o ${QFN}.o ${DI}.o ${ORB}.o ${GAUSS}.o ${MINI}.o
+		${CXX} ${PROG}.o ${LIB1}.o ${LIB2}.o ${LIB3}.o ${WAVE}.o ${LEN}.o ${HYD}.o ${LEO}.o ${QF}.o ${QFN}.o ${ORB}.o ${DI}.o ${GAUSS}.o ${MINI}.o -o ${PROG} ${CPPFLAGS}
 
 
 clean:
@@ -34,3 +36,4 @@ clean:
 	rm -f ${DI} ${DI}.o
 	rm -f ${ORB} ${ORB}.o
 	rm -f ${GAUSS} ${GAUSS}.o
+	rm -f ${MINI} ${MINI}.o

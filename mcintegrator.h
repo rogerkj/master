@@ -12,7 +12,7 @@ class MCIntegrator
 public:
     MCIntegrator();
 
-    double runMCIntegration(double a,double b);
+    double runMCIntegration(double a,double b,double _r,long _idum);
 
 private:
 
@@ -40,6 +40,12 @@ private:
 
     mat rOld;
     mat rNew;
+
+    mat old_inv_up;
+    mat old_inv_down;
+
+    int nThermalize;
+
 };
 
 #endif // MCINTEGRATOR_H

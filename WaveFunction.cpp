@@ -11,6 +11,7 @@ WaveFunction::WaveFunction(int nPart,int nDim,double a,double b,Orbitals* _dr) {
   nDimensions = nDim;
   nParticles = nPart;
 
+
   alpha = a;
   beta = b;
 
@@ -36,6 +37,8 @@ void WaveFunction::update_inverse(double Rs,const mat &r,int i) {
 
   if(i < nParticles/2) {
 
+    mat new_inv_up  = zeros<mat>( nParticles/2 , nParticles/2 );
+
     for(int j = 0; j < nParticles/2; j++) {
       I(j) = 0;
       if(i!=j) {
@@ -46,16 +49,20 @@ void WaveFunction::update_inverse(double Rs,const mat &r,int i) {
     for(int j = 0; j < nParticles/2; j++) {
       if (i!=j) {
 	for(int k = 0; k < nParticles/2; k++)
-	  inv_up(k,j) = inv_up(k,j) - I(j)*inv_up(k,i)/Rs;
+	  new_inv_up(k,j) = inv_up(k,j) - I(j)*inv_up(k,i)/Rs;
       }
     }
 
     for (int k = 0; k < nParticles/2; k++)
-      inv_up(k,i) = inv_up(k,i)/Rs;
+      new_inv_up(k,i) = inv_up(k,i)/Rs;
+
+    inv_up = new_inv_up;
 
   } else {
 
     i = i - nParticles/2;
+
+    mat new_inv_down  = zeros<mat>( nParticles/2 , nParticles/2 );
 
    for(int j = 0; j < nParticles/2; j++) {
       I(j) = 0;
@@ -67,12 +74,14 @@ void WaveFunction::update_inverse(double Rs,const mat &r,int i) {
     for(int j = 0; j < nParticles/2; j++) {
       if (i!=j) {
 	for(int k = 0; k < nParticles/2; k++)
-	  inv_down(k,j) = inv_down(k,j) - I(j)*inv_down(k,i)/Rs;
+	  new_inv_down(k,j) = inv_down(k,j) - I(j)*inv_down(k,i)/Rs;
       }
     }
 
     for (int k = 0; k < nParticles/2; k++)
-      inv_down(k,i) = inv_down(k,i)/Rs;
+      new_inv_down(k,i) = inv_down(k,i)/Rs;
+
+    inv_down = new_inv_down;
 
   }
   
@@ -80,8 +89,23 @@ void WaveFunction::update_inverse(double Rs,const mat &r,int i) {
 
 void WaveFunction::set_inverse(const mat &r) {
 
-  inv_up = inv(slater_up(r));
-  inv_down = inv(slater_down(r));
+  try {
+
+    inv_up = inv(slater_up(r));
+    inv_down = inv(slater_down(r));
+
+  }catch(std::runtime_error){
+
+    inv_up = zeros(nParticles/2, nParticles/2);
+    inv_down = zeros(nParticles/2, nParticles/2);
+
+    cout << "singlular matrix!" << endl;
+    cout << slater_up(r) << endl;
+    cout << slater_down(r) << endl;
+
+  }
+
+
 
 }
 
@@ -111,7 +135,7 @@ double WaveFunction::jastrowOpt(const mat &rNew, const mat &rOld,int i) {
 
     rowvec r12_new = rNew.row(i) - rNew.row(j);
     double r12norm_new = norm(r12_new, 2);
-  
+
     rowvec r12_old = rOld.row(i) - rOld.row(j);
     double r12norm_old = norm(r12_old, 2);
 

@@ -1,3 +1,5 @@
+#include "setup.h"
+
 #include <armadillo>
 #include <math.h>
 #include "LocalEnergyOpt.h"
@@ -22,13 +24,20 @@ LocalEnergyOpt::LocalEnergyOpt(int nDim,int nPart,double _R,int ch,double a,doub
 
 double LocalEnergyOpt::get_local_energy_diatomic(const mat &r) {
 
+
+
+  double jlaplacian = 0.0;
+
+
   rowvec3 rNuclei; 
   rNuclei << R/2 << 0 << 0;
+
+#ifdef JASTROW
 
   rowvec3 rijVec;
 
   mat jgradient  = zeros(nParticles,dimention);
-  double jlaplacian = 0.0;
+ 
   for(int i = 0; i < nParticles; i++) {
     for(int j = 0; j < nParticles; j++) {
       if(i != j) {
@@ -47,6 +56,7 @@ double LocalEnergyOpt::get_local_energy_diatomic(const mat &r) {
   
   jlaplacian += gradient2;
   
+#endif
   
   mat udgradient  = zeros(nParticles,dimention);
 
@@ -85,10 +95,14 @@ double LocalEnergyOpt::get_local_energy_diatomic(const mat &r) {
 
   double gradient = 0.0;
   
+#ifdef JASTROW
+
   for(int i = 0 ; i < nParticles; i++) {
     gradient += dot(udgradient.row(i),jgradient.row(i));
   }
   
+#endif
+
   return -0.5*udlaplacian - 0.5*jlaplacian - gradient + coreEl + electronEl + protonEl;
   
 }
@@ -97,10 +111,17 @@ double LocalEnergyOpt::get_local_energy_diatomic(const mat &r) {
 
 double LocalEnergyOpt::get_local_energy(const mat &r) {
    
+
+
+
+  double jlaplacian = 0.0;
+
+#ifdef JASTROW
+
   rowvec3 rijVec;
 
   mat jgradient  = zeros(nParticles,dimention);
-  double jlaplacian = 0.0;
+ 
   for(int i = 0; i < nParticles; i++) {
     for(int j = 0; j < nParticles; j++) {
       if(i != j) {
@@ -119,6 +140,7 @@ double LocalEnergyOpt::get_local_energy(const mat &r) {
   
   jlaplacian += gradient2;
   
+#endif
   
   mat udgradient  = zeros(nParticles,dimention);
 
@@ -153,10 +175,17 @@ double LocalEnergyOpt::get_local_energy(const mat &r) {
   
   double gradient = 0.0;
   
+#ifdef JASTROW
+
   for(int i = 0 ; i < nParticles; i++) {
     gradient += dot(udgradient.row(i),jgradient.row(i));
   }
   
+#endif
+
+
+
+
   return -0.5*udlaplacian - 0.5*jlaplacian - gradient + coreEl + electronEl;
   
 }

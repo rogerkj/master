@@ -14,9 +14,7 @@ class QuantumForce
 
   QuantumForce(int nDim, int nPart,int ch,double a,double b,Orbitals* _dr,WaveFunction* _wf);
 
-  void quantumforce(const mat &r , mat &qforce);
-
-  void quantumforceOpt (const mat &r , mat &qforce);
+  mat quantumforceOpt (const mat &r);
 
  private:
 
@@ -33,7 +31,7 @@ class QuantumForce
   WaveFunction* wf;
   Orbitals* dr;
 
-  double dfdr(const double &r12, const int &particleNum1, const int &particleNum2);
+  double dfdr(double r12,int particleNum1, int particleNum2);
 
 };
 
