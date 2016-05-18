@@ -32,6 +32,7 @@ double LocalEnergyOpt::get_local_energy_diatomic(const mat &r) {
   rowvec3 rNuclei; 
   rNuclei << R/2 << 0 << 0;
 
+
 #ifdef JASTROW
 
   rowvec3 rijVec;

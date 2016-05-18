@@ -8,15 +8,15 @@ using namespace std;
 
 WaveFunction::WaveFunction(int nPart,int nDim,double a,double b,Orbitals* _dr) {
 
+  //Store dimension and number of particles
   nDimensions = nDim;
   nParticles = nPart;
 
-
+  //Store alpha beta
   alpha = a;
   beta = b;
-
-  //  amat  = zeros<mat>( 4 , 4 );
-
+  
+  //Sets spin value (up or down)
   spin = new bool[nParticles];
 
   for (int i = 0; i < nParticles; i++) {
@@ -26,15 +26,17 @@ WaveFunction::WaveFunction(int nPart,int nDim,double a,double b,Orbitals* _dr) {
       spin[i] = false;
   }
   
+  //Store orbital object
   dr = _dr;
  
 }
 
-
+//Updates the inverse matrix. See section 18.4
 void WaveFunction::update_inverse(double Rs,const mat &r,int i) {
   
   vec I(nParticles);
 
+  //Update up spin particles
   if(i < nParticles/2) {
 
     mat new_inv_up  = zeros<mat>( nParticles/2 , nParticles/2 );
@@ -58,6 +60,7 @@ void WaveFunction::update_inverse(double Rs,const mat &r,int i) {
 
     inv_up = new_inv_up;
 
+    //Update spin down particles
   } else {
 
     i = i - nParticles/2;
@@ -91,11 +94,13 @@ void WaveFunction::set_inverse(const mat &r) {
 
   try {
 
+    //Finds the inverse of the slater matrixes
     inv_up = inv(slater_up(r));
     inv_down = inv(slater_down(r));
 
   }catch(std::runtime_error){
 
+    //Error in inverse. Print error message
     inv_up = zeros(nParticles/2, nParticles/2);
     inv_down = zeros(nParticles/2, nParticles/2);
 
@@ -106,17 +111,19 @@ void WaveFunction::set_inverse(const mat &r) {
   }
 
 
-
 }
 
+//Find slater ratio. See section 18.2
 double WaveFunction::slaterOpt(const mat &rNew,const mat &rOld,int i) {
     
   double Rs = 0;
   
+  //Process up particles
   if (i < nParticles/2) {
     for (int j = 0 ; j < nParticles/2; j++) {
       Rs += dr->waveFunction(rNew,i,j)*inv_up(j,i);
     }
+    //Process down particles
   } else {
     for (int j = 0 ; j < nParticles/2; j++) {
       Rs += dr->waveFunction(rNew,i,j)*inv_down(j,i-nParticles/2);
@@ -126,7 +133,7 @@ double WaveFunction::slaterOpt(const mat &rNew,const mat &rOld,int i) {
   return Rs;
 }
 
-
+//Find Jastrow ratio. See section 18.5
 double WaveFunction::jastrowOpt(const mat &rNew, const mat &rOld,int i) {
 
   double sum = 0;
@@ -149,6 +156,7 @@ double WaveFunction::jastrowOpt(const mat &rNew, const mat &rOld,int i) {
 
 }
 
+//Constant a. See section 14.
 double WaveFunction::amat(int i, int j) {
   
   if (spin[i] == spin[j])
@@ -159,7 +167,7 @@ double WaveFunction::amat(int i, int j) {
 }
      
 
-
+//Brute force jastrow factor. Not used in optimalized version
 double WaveFunction::jastrowbrute(const mat &r_new,const mat &r_old) {
 
   double jast_new = 1.0;
@@ -176,7 +184,7 @@ double WaveFunction::jastrowbrute(const mat &r_new,const mat &r_old) {
 
 }
 
-
+//Finds slater up matrix
 mat WaveFunction::slater_up(const mat &r) {
   
   mat up_mat  = zeros<mat>( nParticles/2 , nParticles/2 );
@@ -191,6 +199,7 @@ mat WaveFunction::slater_up(const mat &r) {
 
 }
 
+//Finds slater down matrix
 mat WaveFunction::slater_down(const mat &r) {
   
   mat down_mat  = zeros<mat>( nParticles/2 , nParticles/2 );
@@ -205,7 +214,7 @@ mat WaveFunction::slater_down(const mat &r) {
 
 }
 
-
+//Brute force slater ratio. Not used in optimalized version.
 double WaveFunction::slaterbrute(const mat &rNew,const mat &rOld) {
 
   mat det_up_new = slater_up(rNew);
@@ -221,11 +230,13 @@ double WaveFunction::slaterbrute(const mat &rNew,const mat &rOld) {
   return detnew*detnew/(detold*detold);
 }
 
+//Finds the slater determinant. Not used in optimalized version.
 double WaveFunction::slater(const mat &r) {
 
   mat detPlus  = zeros<mat>( nParticles/2 , nParticles/2 );
   mat detMinus = zeros<mat>( nParticles/2 , nParticles/2 );
 
+  //Finds orbitals for up and down spin
   for(int i = 0;i < nParticles/2; i++) {
     for(int j = 0; j < nParticles/2; j++) {
       detPlus(i,j)  = dr->waveFunction(r,i,j);
@@ -233,6 +244,8 @@ double WaveFunction::slater(const mat &r) {
     }
   }
 
+
+  //Find Jastrow factor
   double jast = 1.0;
   
   for(int i = 0; i < nParticles; i++) {
@@ -241,36 +254,12 @@ double WaveFunction::slater(const mat &r) {
     }
   }
 
+  //Get determinants and return.
   return det(detPlus)*det(detMinus) * jast;
 
 }
-/*
 
-double WaveFunction::waveFunction(const mat &r,int nParticle,int orbital) {
-  
-  int i = nParticle;
- 
-  double argument = norm(r.row(i));
- 
-  switch (orbital) {
-  case 0:
-    return exp(-argument * alpha);
-  case 1:
-    return (alpha*argument - 2)*exp(-argument * alpha/2.0);
-  case 2: 
-    return r(i,0) * exp(-alpha * argument / 2.0); 
-  case 3: 
-    return r(i,1) * exp(-alpha * argument / 2.0); 
-  case 4: 
-    return r(i,2) * exp(-alpha * argument / 2.0); 
-
-  }
-
-  return 0;
-
-}
-*/
-
+//Finds Jastrow factor.
 double WaveFunction::jastrowFactor(const mat &r,int i,int j) {
 
   rowvec r12 = r.row(i) - r.row(j);

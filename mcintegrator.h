@@ -4,6 +4,8 @@
 #include <armadillo>
 
 #include "WaveFunction.h"
+#include "QuantumForce.h"
+
 
 using namespace arma;
 
@@ -18,13 +20,20 @@ private:
 
     WaveFunction* wf;
 
+    QuantumForce* qf;
+
+
     double getGreensFunctionRatio(const mat &y, const mat &x, const mat &quantumForceNew, const mat &quantumForceOld);
+
+    bool Cycle(int cycle, int i);
+
 
     int nDimensions;
     int charge;
     double stepLength;
     int nParticles;
 
+    int accetpted;
 
     long idum;
 
@@ -40,6 +49,11 @@ private:
 
     mat rOld;
     mat rNew;
+
+
+    mat qforce_old;
+    mat qforce_new;
+
 
     mat old_inv_up;
     mat old_inv_down;

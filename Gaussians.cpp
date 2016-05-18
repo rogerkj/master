@@ -30,15 +30,15 @@ double Gaussians::waveFunction(const mat &r,int nParticle,int orbital) {
 
 	switch (orbital) {
 	case 0:
-		return 6.00288289131012*exp(-207.01561*rSingleParticle) + 5.80572677377551*exp(-37.708151*rSingleParticle) + 1.80939141292887*exp(-10.205297*rSingleParticle);
+		return 4.25194331812225*exp(-130.70932*rSingleParticle) + 4.11229375245432*exp(-23.808861*rSingleParticle) + 1.28162254318487*exp(-6.44360829999999*rSingleParticle);
 	case 1:
-		return -0.346707067600285*exp(-8.2463151*rSingleParticle) + 0.463748697249596*exp(-1.9162662*rSingleParticle) + 0.349998081143196*exp(-0.6232293*rSingleParticle);
+		return -0.23941300621163*exp(-5.0331513*rSingleParticle) + 0.320234233437093*exp(-1.1695961*rSingleParticle) + 0.241685574000907*exp(-0.380389*rSingleParticle);
 	case 2:
-		return 3.10567804189332*r(i,0)*exp(-8.2463151*rSingleParticle) + 1.95293365076282*r(i,0)*exp(-1.9162662*rSingleParticle) + 0.309377533950825*r(i,0)*exp(-0.6232293*rSingleParticle);
+		return 1.67545013446767*r(i,0)*exp(-5.0331513*rSingleParticle) + 1.05356801827835*r(i,0)*exp(-1.1695961*rSingleParticle) + 0.166902899704829*r(i,0)*exp(-0.380389*rSingleParticle);
 	case 3:
-		return 3.10567804189332*r(i,1)*exp(-8.2463151*rSingleParticle) + 1.95293365076282*r(i,1)*exp(-1.9162662*rSingleParticle) + 0.309377533950825*r(i,1)*exp(-0.6232293*rSingleParticle);
+		return 1.67545013446767*r(i,1)*exp(-5.0331513*rSingleParticle) + 1.05356801827835*r(i,1)*exp(-1.1695961*rSingleParticle) + 0.166902899704829*r(i,1)*exp(-0.380389*rSingleParticle);
 	case 4:
-		return 3.10567804189332*r(i,2)*exp(-8.2463151*rSingleParticle) + 1.95293365076282*r(i,2)*exp(-1.9162662*rSingleParticle) + 0.309377533950825*r(i,2)*exp(-0.6232293*rSingleParticle);
+		return 1.67545013446767*r(i,2)*exp(-5.0331513*rSingleParticle) + 1.05356801827835*r(i,2)*exp(-1.1695961*rSingleParticle) + 0.166902899704829*r(i,2)*exp(-0.380389*rSingleParticle);
 	}
 }
 
@@ -56,33 +56,33 @@ rowvec Gaussians::gradient(const mat &r,int nParticle,int orbital) {
 
 	switch (orbital) {
 	case 0:
-		retvec(0) = -2485.38092700626*r(i,0)*exp(-207.01561*rSingleParticle) - 437.846443700539*r(i,0)*exp(-37.708151*rSingleParticle) - 36.9307535163774*r(i,0)*exp(-10.205297*rSingleParticle);
-		retvec(1) = -2485.38092700626*r(i,1)*exp(-207.01561*rSingleParticle) - 437.846443700539*r(i,1)*exp(-37.708151*rSingleParticle) - 36.9307535163774*r(i,1)*exp(-10.205297*rSingleParticle);
-		retvec(2) = -2485.38092700626*r(i,2)*exp(-207.01561*rSingleParticle) - 437.846443700539*r(i,2)*exp(-37.708151*rSingleParticle) - 36.9307535163774*r(i,2)*exp(-10.205297*rSingleParticle);
+		retvec(0) = -1111.53723958061*r(i,0)*exp(-130.70932*rSingleParticle) - 195.818060686707*r(i,0)*exp(-23.808861*rSingleParticle) - 16.5165473134663*r(i,0)*exp(-6.44360829999999*rSingleParticle);
+		retvec(1) = -1111.53723958061*r(i,1)*exp(-130.70932*rSingleParticle) - 195.818060686707*r(i,1)*exp(-23.808861*rSingleParticle) - 16.5165473134663*r(i,1)*exp(-6.44360829999999*rSingleParticle);
+		retvec(2) = -1111.53723958061*r(i,2)*exp(-130.70932*rSingleParticle) - 195.818060686707*r(i,2)*exp(-23.808861*rSingleParticle) - 16.5165473134663*r(i,2)*exp(-6.44360829999999*rSingleParticle);
 		return retvec;
 
 	case 1:
-		retvec(0) = 5.7181114536579*r(i,0)*exp(-8.2463151*rSingleParticle) - 1.77733190766687*r(i,0)*exp(-1.9162662*rSingleParticle) - 0.436258118224435*r(i,0)*exp(-0.6232293*rSingleParticle);
-		retvec(1) = 5.7181114536579*r(i,1)*exp(-8.2463151*rSingleParticle) - 1.77733190766687*r(i,1)*exp(-1.9162662*rSingleParticle) - 0.436258118224435*r(i,1)*exp(-0.6232293*rSingleParticle);
-		retvec(2) = 5.7181114536579*r(i,2)*exp(-8.2463151*rSingleParticle) - 1.77733190766687*r(i,2)*exp(-1.9162662*rSingleParticle) - 0.436258118224435*r(i,2)*exp(-0.6232293*rSingleParticle);
+		retvec(0) = 2.41000376690194*r(i,0)*exp(-5.0331513*rSingleParticle) - 0.749089421029026*r(i,0)*exp(-1.1695961*rSingleParticle) - 0.183869067617262*r(i,0)*exp(-0.380389*rSingleParticle);
+		retvec(1) = 2.41000376690194*r(i,1)*exp(-5.0331513*rSingleParticle) - 0.749089421029026*r(i,1)*exp(-1.1695961*rSingleParticle) - 0.183869067617262*r(i,1)*exp(-0.380389*rSingleParticle);
+		retvec(2) = 2.41000376690194*r(i,2)*exp(-5.0331513*rSingleParticle) - 0.749089421029026*r(i,2)*exp(-1.1695961*rSingleParticle) - 0.183869067617262*r(i,2)*exp(-0.380389*rSingleParticle);
 		return retvec;
 
 	case 2:
-		retvec(0) = ((-51.2207994652066*(r(i,0)*r(i,0)) + 3.10567804189332)*exp(2.5394955*rSingleParticle) + (-7.48468149159878*(r(i,0)*r(i,0)) + 1.95293365076282)*exp(8.8695444*rSingleParticle) + (-0.385626287839798*(r(i,0)*r(i,0)) + 0.309377533950825)*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
-		retvec(1) = -r(i,0)*r(i,1)*(51.2207994652066*exp(2.5394955*rSingleParticle) + 7.48468149159878*exp(8.8695444*rSingleParticle) + 0.385626287839798*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
-		retvec(2) = -r(i,0)*r(i,2)*(51.2207994652066*exp(2.5394955*rSingleParticle) + 7.48468149159878*exp(8.8695444*rSingleParticle) + 0.385626287839798*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
+		retvec(0) = ((-16.8655880447622*(r(i,0)*r(i,0)) + 1.67545013446767)*exp(1.5499851*rSingleParticle) + (-2.46449809052618*(r(i,0)*r(i,0)) + 1.05356801827835)*exp(5.4135403*rSingleParticle) + (-0.126976054231641*(r(i,0)*r(i,0)) + 0.166902899704829)*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
+		retvec(1) = -r(i,0)*r(i,1)*(16.8655880447622*exp(1.5499851*rSingleParticle) + 2.46449809052618*exp(5.4135403*rSingleParticle) + 0.126976054231641*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
+		retvec(2) = -r(i,0)*r(i,2)*(16.8655880447622*exp(1.5499851*rSingleParticle) + 2.46449809052618*exp(5.4135403*rSingleParticle) + 0.126976054231641*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
 		return retvec;
 
 	case 3:
-		retvec(0) = -r(i,0)*r(i,1)*(51.2207994652066*exp(2.5394955*rSingleParticle) + 7.48468149159878*exp(8.8695444*rSingleParticle) + 0.385626287839798*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
-		retvec(1) = ((-51.2207994652066*(r(i,1)*r(i,1)) + 3.10567804189332)*exp(2.5394955*rSingleParticle) + (-7.48468149159878*(r(i,1)*r(i,1)) + 1.95293365076282)*exp(8.8695444*rSingleParticle) + (-0.385626287839798*(r(i,1)*r(i,1)) + 0.309377533950825)*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
-		retvec(2) = -r(i,1)*r(i,2)*(51.2207994652066*exp(2.5394955*rSingleParticle) + 7.48468149159878*exp(8.8695444*rSingleParticle) + 0.385626287839798*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
+		retvec(0) = -r(i,0)*r(i,1)*(16.8655880447622*exp(1.5499851*rSingleParticle) + 2.46449809052618*exp(5.4135403*rSingleParticle) + 0.126976054231641*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
+		retvec(1) = ((-16.8655880447622*(r(i,1)*r(i,1)) + 1.67545013446767)*exp(1.5499851*rSingleParticle) + (-2.46449809052618*(r(i,1)*r(i,1)) + 1.05356801827835)*exp(5.4135403*rSingleParticle) + (-0.126976054231641*(r(i,1)*r(i,1)) + 0.166902899704829)*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
+		retvec(2) = -r(i,1)*r(i,2)*(16.8655880447622*exp(1.5499851*rSingleParticle) + 2.46449809052618*exp(5.4135403*rSingleParticle) + 0.126976054231641*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
 		return retvec;
 
 	case 4:
-		retvec(0) = -r(i,0)*r(i,2)*(51.2207994652066*exp(2.5394955*rSingleParticle) + 7.48468149159878*exp(8.8695444*rSingleParticle) + 0.385626287839798*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
-		retvec(1) = -r(i,1)*r(i,2)*(51.2207994652066*exp(2.5394955*rSingleParticle) + 7.48468149159878*exp(8.8695444*rSingleParticle) + 0.385626287839798*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
-		retvec(2) = ((-51.2207994652066*(r(i,2)*r(i,2)) + 3.10567804189332)*exp(2.5394955*rSingleParticle) + (-7.48468149159878*(r(i,2)*r(i,2)) + 1.95293365076282)*exp(8.8695444*rSingleParticle) + (-0.385626287839798*(r(i,2)*r(i,2)) + 0.309377533950825)*exp(10.1625813*rSingleParticle))*exp(-10.7858106*rSingleParticle);
+		retvec(0) = -r(i,0)*r(i,2)*(16.8655880447622*exp(1.5499851*rSingleParticle) + 2.46449809052618*exp(5.4135403*rSingleParticle) + 0.126976054231641*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
+		retvec(1) = -r(i,1)*r(i,2)*(16.8655880447622*exp(1.5499851*rSingleParticle) + 2.46449809052618*exp(5.4135403*rSingleParticle) + 0.126976054231641*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
+		retvec(2) = ((-16.8655880447622*(r(i,2)*r(i,2)) + 1.67545013446767)*exp(1.5499851*rSingleParticle) + (-2.46449809052618*(r(i,2)*r(i,2)) + 1.05356801827835)*exp(5.4135403*rSingleParticle) + (-0.126976054231641*(r(i,2)*r(i,2)) + 0.166902899704829)*exp(6.2027474*rSingleParticle))*exp(-6.5831364*rSingleParticle);
 		return retvec;
 
 	}
@@ -101,15 +101,15 @@ double Gaussians::laplacian(const mat &r,int nParticle,int orbital) {
 
 	switch (orbital) {
 	case 0:
-		return (753.778616136852*(r(i,0)*r(i,0)) + 753.778616136852*(r(i,1)*r(i,1)) + 753.778616136852*(r(i,2)*r(i,2)) - 110.792260549132)*exp(-10.205297*rSingleParticle) + (33020.7596277459*(r(i,0)*r(i,0)) + 33020.7596277459*(r(i,1)*r(i,1)) + 33020.7596277459*(r(i,2)*r(i,2)) - 1313.53933110162)*exp(-37.708151*rSingleParticle) + (1029025.29737313*(r(i,0)*r(i,0)) + 1029025.29737313*(r(i,1)*r(i,1)) + 1029025.29737313*(r(i,2)*r(i,2)) - 7456.14278101877)*exp(-207.01561*rSingleParticle);
+		return (212.852322712788*(r(i,0)*r(i,0)) + 212.852322712788*(r(i,1)*r(i,1)) + 212.852322712788*(r(i,2)*r(i,2)) - 49.5496419403988)*exp(-6.4436083*rSingleParticle) + (9324.40997635873*(r(i,0)*r(i,0)) + 9324.40997635873*(r(i,1)*r(i,1)) + 9324.40997635873*(r(i,2)*r(i,2)) - 587.45418206012)*exp(-23.808861*rSingleParticle) + (290576.553480516*(r(i,0)*r(i,0)) + 290576.553480516*(r(i,1)*r(i,1)) + 290576.553480516*(r(i,2)*r(i,2)) - 3334.61171874182)*exp(-130.70932*rSingleParticle);
 	case 1:
-		return (-94.3066976475641*(r(i,0)*r(i,0)) - 94.3066976475641*(r(i,1)*r(i,1)) - 94.3066976475641*(r(i,2)*r(i,2)) + 17.1543343609737)*exp(-8.2463151*rSingleParticle) + (0.543777683280663*(r(i,0)*r(i,0)) + 0.543777683280663*(r(i,1)*r(i,1)) + 0.543777683280663*(r(i,2)*r(i,2)) - 1.3087743546733)*exp(-0.6232293*rSingleParticle) + (6.81168212168708*(r(i,0)*r(i,0)) + 6.81168212168708*(r(i,1)*r(i,1)) + 6.81168212168708*(r(i,2)*r(i,2)) - 5.33199572300061)*exp(-1.9162662*rSingleParticle);
+		return (-24.2598271847748*(r(i,0)*r(i,0)) - 24.2598271847748*(r(i,1)*r(i,1)) - 24.2598271847748*(r(i,2)*r(i,2)) + 7.23001130070583)*exp(-5.0331513*rSingleParticle) + (0.139883541523725*(r(i,0)*r(i,0)) + 0.139883541523725*(r(i,1)*r(i,1)) + 0.139883541523725*(r(i,2)*r(i,2)) - 0.551607202851786)*exp(-0.380389*rSingleParticle) + (1.75226413077361*(r(i,0)*r(i,0)) + 1.75226413077361*(r(i,1)*r(i,1)) + 1.75226413077361*(r(i,2)*r(i,2)) - 2.24726826308708)*exp(-1.1695961*rSingleParticle);
 	case 2:
-		return (0.480667202863991*(r(i,0)*r(i,0)*r(i,0)) + 0.480667202863991*r(i,0)*(r(i,1)*r(i,1)) + 0.480667202863991*r(i,0)*(r(i,2)*r(i,2)) - 1.92813143919899*r(i,0))*exp(-0.6232293*rSingleParticle) + (28.6852843202326*(r(i,0)*r(i,0)*r(i,0)) + 28.6852843202326*r(i,0)*(r(i,1)*r(i,1)) + 28.6852843202326*r(i,0)*(r(i,2)*r(i,2)) - 37.4234074579939*r(i,0))*exp(-1.9162662*rSingleParticle) + (844.76570412801*(r(i,0)*r(i,0)*r(i,0)) + 844.76570412801*r(i,0)*(r(i,1)*r(i,1)) + 844.76570412801*r(i,0)*(r(i,2)*r(i,2)) - 256.103997326033*r(i,0))*exp(-8.2463151*rSingleParticle);
+		return (0.096600588586239*(r(i,0)*r(i,0)*r(i,0)) + 0.096600588586239*r(i,0)*(r(i,1)*r(i,1)) + 0.096600588586239*r(i,0)*(r(i,2)*r(i,2)) - 0.634880271158203*r(i,0))*exp(-0.380389*rSingleParticle) + (5.76493471027373*(r(i,0)*r(i,0)*r(i,0)) + 5.76493471027373*r(i,0)*(r(i,1)*r(i,1)) + 5.76493471027373*r(i,0)*(r(i,2)*r(i,2)) - 12.3224904526309*r(i,0))*exp(-1.1695961*rSingleParticle) + (169.774112785519*(r(i,0)*r(i,0)*r(i,0)) + 169.774112785519*r(i,0)*(r(i,1)*r(i,1)) + 169.774112785519*r(i,0)*(r(i,2)*r(i,2)) - 84.3279402238112*r(i,0))*exp(-5.0331513*rSingleParticle);
 	case 3:
-		return (0.480667202863991*(r(i,0)*r(i,0))*r(i,1) + 0.480667202863991*(r(i,1)*r(i,1)*r(i,1)) + 0.480667202863991*r(i,1)*(r(i,2)*r(i,2)) - 1.92813143919899*r(i,1))*exp(-0.6232293*rSingleParticle) + (28.6852843202326*(r(i,0)*r(i,0))*r(i,1) + 28.6852843202326*(r(i,1)*r(i,1)*r(i,1)) + 28.6852843202326*r(i,1)*(r(i,2)*r(i,2)) - 37.4234074579939*r(i,1))*exp(-1.9162662*rSingleParticle) + (844.76570412801*(r(i,0)*r(i,0))*r(i,1) + 844.76570412801*(r(i,1)*r(i,1)*r(i,1)) + 844.76570412801*r(i,1)*(r(i,2)*r(i,2)) - 256.103997326033*r(i,1))*exp(-8.2463151*rSingleParticle);
+		return (0.096600588586239*(r(i,0)*r(i,0))*r(i,1) + 0.096600588586239*(r(i,1)*r(i,1)*r(i,1)) + 0.096600588586239*r(i,1)*(r(i,2)*r(i,2)) - 0.634880271158203*r(i,1))*exp(-0.380389*rSingleParticle) + (5.76493471027373*(r(i,0)*r(i,0))*r(i,1) + 5.76493471027373*(r(i,1)*r(i,1)*r(i,1)) + 5.76493471027373*r(i,1)*(r(i,2)*r(i,2)) - 12.3224904526309*r(i,1))*exp(-1.1695961*rSingleParticle) + (169.774112785519*(r(i,0)*r(i,0))*r(i,1) + 169.774112785519*(r(i,1)*r(i,1)*r(i,1)) + 169.774112785519*r(i,1)*(r(i,2)*r(i,2)) - 84.3279402238112*r(i,1))*exp(-5.0331513*rSingleParticle);
 	case 4:
-		return (0.480667202863991*(r(i,0)*r(i,0))*r(i,2) + 0.480667202863991*(r(i,1)*r(i,1))*r(i,2) + 0.480667202863991*(r(i,2)*r(i,2)*r(i,2)) - 1.92813143919899*r(i,2))*exp(-0.6232293*rSingleParticle) + (28.6852843202326*(r(i,0)*r(i,0))*r(i,2) + 28.6852843202326*(r(i,1)*r(i,1))*r(i,2) + 28.6852843202326*(r(i,2)*r(i,2)*r(i,2)) - 37.4234074579939*r(i,2))*exp(-1.9162662*rSingleParticle) + (844.76570412801*(r(i,0)*r(i,0))*r(i,2) + 844.76570412801*(r(i,1)*r(i,1))*r(i,2) + 844.76570412801*(r(i,2)*r(i,2)*r(i,2)) - 256.103997326033*r(i,2))*exp(-8.2463151*rSingleParticle);
+		return (0.096600588586239*(r(i,0)*r(i,0))*r(i,2) + 0.096600588586239*(r(i,1)*r(i,1))*r(i,2) + 0.096600588586239*(r(i,2)*r(i,2)*r(i,2)) - 0.634880271158203*r(i,2))*exp(-0.380389*rSingleParticle) + (5.76493471027373*(r(i,0)*r(i,0))*r(i,2) + 5.76493471027373*(r(i,1)*r(i,1))*r(i,2) + 5.76493471027373*(r(i,2)*r(i,2)*r(i,2)) - 12.3224904526309*r(i,2))*exp(-1.1695961*rSingleParticle) + (169.774112785519*(r(i,0)*r(i,0))*r(i,2) + 169.774112785519*(r(i,1)*r(i,1))*r(i,2) + 169.774112785519*(r(i,2)*r(i,2)*r(i,2)) - 84.3279402238112*r(i,2))*exp(-5.0331513*rSingleParticle);
 	}
 
 }

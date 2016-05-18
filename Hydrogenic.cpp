@@ -19,15 +19,19 @@ void Hydrogenic::setR(double R){}
 
 double Hydrogenic::waveFunction(const mat &r,int nParticle,int orbital) {
 
+
 	int i = nParticle;
 	double rSingleParticle = 0;
 	double argument = 0.0;
 
+	//Find distance from core of current particle
 	for(int j = 0; j < nDimensions; j++) {
 		rSingleParticle += r(i,j) * r(i,j);
 	}
 
 	argument += sqrt(rSingleParticle);
+	
+	//Hydrogenic orbitals.
 	switch (orbital) {
 	case 0:
 		return exp(-alpha*argument);
@@ -68,17 +72,23 @@ double Hydrogenic::waveFunction(const mat &r,int nParticle,int orbital) {
 	}
 }
 
+
+//Gradient of orbital
 rowvec Hydrogenic::gradient(const mat &r,int nParticle,int orbital) {
 
 	int i = nParticle;
 	double rSingleParticle = 0;
 	double argument = 0.0;
 
+	//Find distance from core of current particle
 	for(int j = 0; j < nDimensions; j++) {
 		rSingleParticle += r(i,j) * r(i,j);
 	}
 
 	argument += sqrt(rSingleParticle);
+
+
+	//retrun vector
 	rowvec retvec(3);
 
 	switch (orbital) {
@@ -226,12 +236,16 @@ rowvec Hydrogenic::gradient(const mat &r,int nParticle,int orbital) {
 
 	}
 }
+
+
+//Laplace of orbital
 double Hydrogenic::laplacian(const mat &r,int nParticle,int orbital) {
 
 	int i = nParticle;
 	double rSingleParticle = 0;
 	double argument = 0.0;
 
+	//Find distance from core of current particle
 	for(int j = 0; j < nDimensions; j++) {
 		rSingleParticle += r(i,j) * r(i,j);
 	}

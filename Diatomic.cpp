@@ -40,9 +40,10 @@ void Diatomic::setR(double R){
 
 double Diatomic::waveFunction(const mat &r,int nParticle,int orbital) {
 
+
   double value;
  
-  if (orbital % 2 == 0){
+  if ((orbital % 2) == 0){
     value = dr->waveFunction( r + rNuclei, nParticle, orbital/2)
       + dr->waveFunction( r - rNuclei, nParticle, orbital/2);
   } else {
@@ -57,7 +58,7 @@ rowvec Diatomic::gradient(const mat &r,int nParticle,int orbital) {
 
   rowvec gradient(nDimensions);
 
-  if (orbital % 2 == 0){
+  if ((orbital % 2) == 0){
     gradient = dr->gradient( r + rNuclei, nParticle, orbital/2)
       + dr->gradient( r - rNuclei, nParticle, orbital/2);
   } else {
@@ -70,7 +71,7 @@ double Diatomic::laplacian(const mat &r,int nParticle,int orbital) {
 
   double laplacian;
 
-  if (orbital % 2 == 0){
+  if ((orbital % 2) == 0){
     laplacian = dr->laplacian( r + rNuclei, nParticle, orbital/2)
       + dr->laplacian( r - rNuclei,nParticle, orbital/2);
   } else {
